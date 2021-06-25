@@ -7,7 +7,9 @@ import com.huhaorui.osshelper.oss.OssOperator;
 import com.huhaorui.osshelper.util.FileUtil;
 import com.huhaorui.osshelper.util.RegexUtil;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -36,6 +38,7 @@ public class Main {
                 return;
             }
         }
+        assert ossOperator != null;
         Pair<List<String>, List<String>> stringList;
         try {
             stringList = RegexUtil.getImageUrlList(FileUtil.getFileAsString(path));
@@ -43,7 +46,27 @@ public class Main {
             System.out.println("文件不存在");
             return;
         }
-        //TODO 上传至OSS
-        //TODO 更换链接
+        List<String> paths = stringList.getFirst();
+        List<String> margins = stringList.getSecond();
+        List<String> urls = new ArrayList<>();
+        paths.forEach(it -> {
+            try {
+                urls.add(String.valueOf(ossOperator.uploadFile(FileUtil.getFileName(it), FileUtil.getFileInputStream(it))));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                urls.add("");
+            }
+        });
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < urls.size(); i++) {
+            result.append(margins.get(i));
+            result.append(urls.get(i));
+        }
+        result.append(margins.get(margins.size() - 1));
+        try {
+            FileUtil.writeStringToFile(result.toString(), "new_" + FileUtil.getFileName(path));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

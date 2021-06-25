@@ -20,4 +20,17 @@ public class FileUtil {
         inputStream.close();
         return new String(bytes, StandardCharsets.UTF_8);
     }
+
+    public static String getFileName(String path) {
+        String[] parts = path.split("\\\\");
+        return parts[parts.length - 1];
+    }
+
+    public static void writeStringToFile(String content, String path) throws IOException {
+        File file = new File(path);
+        FileWriter writer = new FileWriter(file);
+        writer.write(content);
+        writer.flush();
+        writer.close();
+    }
 }
