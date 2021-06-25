@@ -9,12 +9,27 @@ repositories {
     mavenCentral()
 }
 
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+jar {
+    manifestContentCharset 'utf-8'
+    metadataCharset 'utf-8'
+    manifest {
+        attributes "Main-Class": "com.huhaorui.osshelper.Main"
+    }
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+
+}
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
-    implementation 'com.aliyun.oss:aliyun-sdk-oss:3.10.2'
-    implementation 'com.qiniu:qiniu-java-sdk:7.8.0'
-    implementation 'javax.xml.bind:jaxb-api:2.3.1'
+    compile 'com.aliyun.oss:aliyun-sdk-oss:3.10.2'
+    compile 'com.qiniu:qiniu-java-sdk:7.8.0'
+    compile 'javax.xml.bind:jaxb-api:2.3.1'
 }
 
 test {
