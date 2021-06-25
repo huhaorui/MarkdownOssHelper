@@ -65,6 +65,7 @@ public class Main {
         result.append(margins.get(margins.size() - 1));
         try {
             FileUtil.writeStringToFile(result.toString(), "new_" + FileUtil.getFileName(path));
+            System.out.println("处理完成，文件输出成功");
         } catch (IOException e) {
             e.printStackTrace();
         }

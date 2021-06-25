@@ -13,6 +13,7 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
     implementation 'com.aliyun.oss:aliyun-sdk-oss:3.10.2'
+    implementation 'com.qiniu:qiniu-java-sdk:7.8.0'
     implementation 'javax.xml.bind:jaxb-api:2.3.1'
 }
 

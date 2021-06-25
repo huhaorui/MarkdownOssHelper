@@ -3,6 +3,7 @@ package com.huhaorui.osshelper.factory;
 import com.huhaorui.osshelper.model.OssType;
 import com.huhaorui.osshelper.oss.AliyunOssOperator;
 import com.huhaorui.osshelper.oss.OssOperator;
+import com.huhaorui.osshelper.oss.QiniuOssOperator;
 
 import java.util.Scanner;
 
@@ -35,7 +36,15 @@ public class OssOperatorFactory {
     }
 
     private static OssOperator getQiniuOssInstance() {
-        return null;
-        //TODO 完成七牛云的OSS操作对象实例化
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("请输入OSS的访问域名");
+        String endPoint = scanner.nextLine();
+        System.out.println("请输入OSS的AccessKeyId");
+        String accessKeyId = scanner.nextLine();
+        System.out.println("请输入OSS的AccessKeySecret");
+        String accessKeySecret = scanner.nextLine();
+        System.out.println("请输入OSS的BucketName");
+        String bucketName = scanner.nextLine();
+        return new QiniuOssOperator(endPoint,accessKeyId, accessKeySecret, bucketName);
     }
 }
