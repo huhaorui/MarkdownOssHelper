@@ -6,14 +6,13 @@ import com.huhaorui.osshelper.oss.OssOperator;
 import com.huhaorui.osshelper.util.FileUtil;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
  * @author HHR
  */
 public class Main {
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         FileUtil fileUtil = new FileUtil();
         OssOperator ossOperator;

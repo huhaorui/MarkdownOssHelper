@@ -36,5 +36,6 @@ public class OssOperatorFactory {
 
     private static OssOperator getQiniuOssInstance() {
         return null;
+        //TODO 完成七牛云的OSS操作对象实例化
     }
 }
